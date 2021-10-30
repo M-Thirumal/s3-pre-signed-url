@@ -18,4 +18,11 @@
     2. aws_access_key_id
     3. aws_secret_access_key
     4. region_name
-    5. 
+    
+#### Deploy
+
+    chalice deploy
+
+Make sure `IAM` is configured in home directory
+
+
