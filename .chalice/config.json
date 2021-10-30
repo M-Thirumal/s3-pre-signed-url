@@ -3,7 +3,9 @@
   "app_name": "presigned-url",
   "stages": {
     "dev": {
-      "api_gateway_stage": "api"
+      "api_gateway_stage": "api",
+      "aws_access_key_id": "",
+      "aws_secret_access_key": "GfS56c9HMmgGwTzMgLk1DbOKdCzHasGVZZdOUFXr"
     }
   }
 }
