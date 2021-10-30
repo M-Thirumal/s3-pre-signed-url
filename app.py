@@ -30,6 +30,12 @@ def generate_pre_signed_url_for_upload():
     return response
 
 
+@app.lambda_function()
+def handler(event, context):
+    logging.debug(event)
+    return get_pre_signed_url(event['arguments']['fileName'])
+
+
 def get_pre_signed_url(file_name):
     try:
         response = s3_client \
