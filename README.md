@@ -1,4 +1,6 @@
 # s3-pre-signed-url
+![Python](https://img.shields.io/badge/-Python-333333?style=flat&logo=python)
+![AWS Cloud](https://img.shields.io/badge/-AWS%20Cloud-333333?style=flat&logo=amazon)
 
 ### Install Dependencies
 
