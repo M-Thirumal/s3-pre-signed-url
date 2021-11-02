@@ -14,7 +14,7 @@
 
     chalice deploy
 
-### Replace the value with on following variable
+### Set the value for the following variable
 
     1. bucket
     2. aws_access_key_id
