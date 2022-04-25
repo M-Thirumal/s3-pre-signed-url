@@ -11,12 +11,12 @@ def test_pass():
 
 @pytest.mark.skip
 def test_get():
-    logging.debug('Test Get poll')
-    with open('tests/get.json', ) as f:
+    logging.debug('Test pre-signed URL')
+    with open('tests/pre-signed-url.json', ) as f:
         data = json.load(f)
     with Client(app, stage_name='dev') as client:
         result = client.lambda_.invoke('handler', data)
-        logging.debug("result %s", result)
-        assert 'pass' == 'pass'
+        logging.debug("result %s", result.payload)
+        assert result.payload is not None
 
 

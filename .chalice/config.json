@@ -4,8 +4,9 @@
   "stages": {
     "dev": {
       "api_gateway_stage": "api",
+      "iam_policy_file": "policy.json",
       "aws_access_key_id": "",
-      "aws_secret_access_key": "GfS56c9HMmgGwTzMgLk1DbOKdCzHasGVZZdOUFXr"
+      "aws_secret_access_key": "7UMxL4Y9VxgJPgzxXudDm1jUoZb7YHf0aT1XtNuO"
     }
   }
 }

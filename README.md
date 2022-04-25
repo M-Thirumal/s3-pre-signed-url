@@ -25,6 +25,15 @@
 
     chalice deploy
 
+
+To Run test::
+	
+	$ py.test tests/
+	
+	$ pytest --log-cli-level=DEBUG
+	 
+ 
+
 Make sure `IAM` is configured in home directory
 
 
