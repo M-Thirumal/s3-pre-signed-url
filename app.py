@@ -10,6 +10,7 @@ app = Chalice(app_name='presigned-url', debug=True, configure_logs=False)
 app.debug = True
 logging.getLogger().setLevel(logging.DEBUG)
 
+
 # @app.route('/generate-pre-signed-url-for-upload', methods=['POST'], content_types=['application/json'])
 # def generate_pre_signed_url_for_upload():
 #     logging.debug("Generate Pre-Signed URL for upload")
@@ -35,7 +36,8 @@ def get_pre_signed_url(file_name):
     print("Creating pre-signed url for {}".format(file_name))
     try:
         response = boto3.client('s3') \
-            .generate_presigned_post(Bucket=os.environ.get('bucket'), Key=file_name, ExpiresIn=300)
+            .generate_presigned_post(Bucket=os.environ.get('bucket'), Key=os.environ.get('folder_location') + file_name,
+                                     ExpiresIn=300)
     except ClientError as e:
         logging.error(e)
         return None

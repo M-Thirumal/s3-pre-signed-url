@@ -6,12 +6,14 @@
   "stages": {
     "dev": {
       "environment_variables": {
-         "bucket": "evoters.in/development/"
+        "bucket": "evoters.in",
+        "folder_location": "development/"
       }
     },
     "prod": {
       "environment_variables": {
-         "bucket": "evoters.in/production/"
+        "bucket": "evoters.in",
+        "folder_location": "production/"
       }
     }
   }
