@@ -9,7 +9,7 @@ def test_pass():
     assert 0 == 0
 
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_get():
     logging.debug('Test pre-signed URL')
     with open('tests/pre-signed-url.json', ) as f:
