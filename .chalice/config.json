@@ -8,6 +8,11 @@
       "environment_variables": {
          "bucket": "evoters.in/development/"
       }
+    },
+    "prod": {
+      "environment_variables": {
+         "bucket": "evoters.in/production/"
+      }
     }
   }
 }
