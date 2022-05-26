@@ -4,7 +4,8 @@
   "api_gateway_stage": "api",
   "iam_policy_file": "policy.json",
   "environment_variables": {
-    "bucket": "evoters.in"
+    "bucket": "evoters.in",
+    "region_name": "ap-south-1"
   },
   "stages": {
     "dev": {
