@@ -35,8 +35,10 @@ def handler(event, context):
 def get_pre_signed_url(file_name):
     print("Creating pre-signed url for {}".format(file_name))
     try:
-        response = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"),
-                                aws_secret_access_key=os.environ.get("aws_secret_access_key")) \
+        # Don't use/depends on policy, "It will create presigned url but won't allow to upload the file
+        # Will get "The AWS Access Key Id you provided does not exist in our records." error
+        response = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"), aws_secret_access_key=os
+                                .environ.get("aws_secret_access_key", region_name=os.environ.get("region_name")))\
             .generate_presigned_post(Bucket=os.environ.get('bucket'), Key=os.environ.get('folder_location') + file_name,
                                      ExpiresIn=300)
     except ClientError as e:
