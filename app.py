@@ -29,17 +29,19 @@ logging.getLogger().setLevel(logging.DEBUG)
 @app.lambda_function()
 def handler(event, context):
     logging.debug(event)
-    return get_pre_signed_url(event['arguments']['fileName'])
+    if 'bucket' in event['arguments']:
+        get_pre_signed_url(event['arguments']['bucket'], event['arguments']['fileName'])
+    return get_pre_signed_url(os.environ.get('bucket'), event['arguments']['fileName'])
 
 
-def get_pre_signed_url(file_name):
+def get_pre_signed_url(bucket, file_name):
     print("Creating pre-signed url for {}".format(file_name))
     try:
         # Don't use/depends on policy, "It will create pre-signed url but won't allow to upload the file
         # Will get "The AWS Access Key Id you provided does not exist in our records." error
         response = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"), aws_secret_access_key=os
                                 .environ.get("aws_secret_access_key"), region_name=os.environ.get("region_name"))\
-            .generate_presigned_post(Bucket=os.environ.get('bucket'), Key=os.environ.get('folder_location') + file_name,
+            .generate_presigned_post(Bucket=bucket, Key=os.environ.get('folder_location') + file_name,
                                      ExpiresIn=300)
     except ClientError as e:
         logging.error(e)

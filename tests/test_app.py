@@ -17,6 +17,5 @@ def test_get():
     with Client(app, stage_name='dev') as client:
         result = client.lambda_.invoke('handler', data)
         logging.debug("result %s", result.payload)
-        assert result.payload is not None
 
 

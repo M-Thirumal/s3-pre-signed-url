@@ -1,6 +1,7 @@
 {
   "arguments": {
-    "fileName": "icms.log"
+    "fileName": "icms.log",
+    "bucket": "enkindle"
   },
   "identity": {
     "claims": {
