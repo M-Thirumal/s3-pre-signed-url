@@ -52,6 +52,25 @@ py.test tests/
 pytest --log-cli-level=DEBUG
 ----
 
+
+== Creating Pre-signed URL for specific version of file
+Syntax
+[source, shell]
+----
+{fileName}?versionId={versionId}
+----
+Example
+[source, json]
+----
+{
+    "arguments": {
+        "fileName": "icms.log?versionId=Ldsnjdas31k12dfe",
+        "bucket": "bucketName"
+    }
+}
+----
+
+
 Upload using `POSTMAN`
 
 image::postman.png[Postman]
@@ -78,3 +97,5 @@ Make sure `IAM` is configured in home directory
 === Solutions
 
 Provide the `environment variable`. `Access & Security` is must. Without key also it will generate the presigned url but it will not have the pass-key in `X-Amz-Credential`
+
+
