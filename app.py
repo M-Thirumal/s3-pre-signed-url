@@ -29,24 +29,36 @@ logging.getLogger().setLevel(logging.DEBUG)
 @app.lambda_function()
 def handler(event, context):
     logging.debug(event)
+    version_id = event['arguments']['versionId']
+    file_name = event['arguments']['fileName']
     if 'bucket' in event['arguments']:
         logging.debug("Creating pre-signed url for the bucket {}".format(event['arguments']['bucket']))
-        return get_pre_signed_url(event['arguments']['bucket'], event['arguments']['fileName'])
-    return get_pre_signed_url(os.environ.get('bucket'), event['arguments']['fileName'])
+        return get_pre_signed_url(event['arguments']['bucket'], file_name, version_id)
+    return get_pre_signed_url(os.environ.get('bucket'), file_name, version_id)
 
 
-def get_pre_signed_url(bucket, file_name):
+def get_pre_signed_url(bucket, file_name, version_id):
     print("Creating pre-signed url for {}".format(bucket))
     try:
         # Don't use/depends on policy, "It will create pre-signed url but won't allow to upload the file
         # Will get "The AWS Access Key Id you provided does not exist in our records." error
-        response = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"), aws_secret_access_key=os
-                                .environ.get("aws_secret_access_key"), region_name=os.environ.get("region_name"))\
-            .generate_presigned_post(Bucket=bucket, Key=os.environ.get('folder_location') + file_name,
-                                     ExpiresIn=300)
+        s3_client = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"), aws_secret_access_key=os
+                                 .environ.get("aws_secret_access_key"), region_name=os.environ.get("region_name"))
+        if not version_id:
+            response = s3_client.generate_presigned_post(Bucket=bucket,
+                                                         Key=os.environ.get('folder_location') + file_name,
+                                                         ExpiresIn=300)
+            logging.debug("Created url without version")
+        else:
+            response = s3_client.generate_presigned_url(ClientMethod='get_object', Params={
+                'Bucket': bucket,
+                'Key': os.environ.get('folder_location') + file_name,
+                'VersionId': version_id
+            })
+            logging.debug("Created url for version")
+
     except ClientError as e:
         logging.error(e)
         return None
     logging.debug("Pre-Signed URL {}".format(response))
-    print(response)
     return response

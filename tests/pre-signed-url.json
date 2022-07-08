@@ -1,7 +1,8 @@
 {
   "arguments": {
-    "fileName": "icms.log",
-    "bucket": "enkindle-invoice"
+    "fileName": "f6fb6b51-6c34-44e0-9088-9b715ff2e6c1/f6fb6b51-6c34-44e0-9088-9b715ff2e6c1.pdf",
+    "bucket": "enkindle-invoice",
+    "versionId": "eD3hGi99zRPyQlao92W7wP2bijFS72sP"
   },
   "identity": {
     "claims": {
