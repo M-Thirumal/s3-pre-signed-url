@@ -1,7 +1,7 @@
 {
   "arguments": {
     "fileName": "icms.log",
-    "bucket": "evoters.in"
+    "bucket": "enkindle-invoice"
   },
   "identity": {
     "claims": {

@@ -30,12 +30,13 @@ logging.getLogger().setLevel(logging.DEBUG)
 def handler(event, context):
     logging.debug(event)
     if 'bucket' in event['arguments']:
-        get_pre_signed_url(event['arguments']['bucket'], event['arguments']['fileName'])
+        logging.debug("Creating pre-signed url for the bucket {}".format(event['arguments']['bucket']))
+        return get_pre_signed_url(event['arguments']['bucket'], event['arguments']['fileName'])
     return get_pre_signed_url(os.environ.get('bucket'), event['arguments']['fileName'])
 
 
 def get_pre_signed_url(bucket, file_name):
-    print("Creating pre-signed url for {}".format(file_name))
+    print("Creating pre-signed url for {}".format(bucket))
     try:
         # Don't use/depends on policy, "It will create pre-signed url but won't allow to upload the file
         # Will get "The AWS Access Key Id you provided does not exist in our records." error
