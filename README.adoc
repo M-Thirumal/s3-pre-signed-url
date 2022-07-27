@@ -69,10 +69,13 @@ Example
 {
     "arguments": {
         "fileName": "icms.log?versionId=Ldsnjdas31k12dfe",
-        "bucket": "bucketName"
+        "bucket": "bucketName",
+        "fileEvent": "upload"
     }
 }
 ----
+
+`fileEvent` will decide the URL is for `upload` or `download`.
 
 
 Upload using `POSTMAN`
