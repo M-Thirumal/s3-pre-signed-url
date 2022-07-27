@@ -28,7 +28,7 @@ logging.getLogger().setLevel(logging.DEBUG)
 
 @app.lambda_function()
 def handler(event, context):
-    logging.debug(event)
+    logging.debug("The event {} and context {}".format(event, context))
     version_id = event['arguments']['versionId']
     file_name = event['arguments']['fileName']
     if 'bucket' in event['arguments']:
@@ -44,19 +44,17 @@ def get_pre_signed_url(bucket, file_name, version_id):
         # Will get "The AWS Access Key Id you provided does not exist in our records." error
         s3_client = boto3.client('s3', aws_access_key_id=os.environ.get("aws_access_key_id"), aws_secret_access_key=os
                                  .environ.get("aws_secret_access_key"), region_name=os.environ.get("region_name"))
-        if not version_id:
-            response = s3_client.generate_presigned_post(Bucket=bucket,
-                                                         Key=os.environ.get('folder_location') + file_name,
-                                                         ExpiresIn=300)
-            logging.debug("Created url without version")
-        else:
-            response = s3_client.generate_presigned_url(ClientMethod='get_object', Params={
-                'Bucket': bucket,
-                'Key': os.environ.get('folder_location') + file_name,
-                'VersionId': version_id
-            })
+        # response = s3_client.generate_presigned_post(Bucket=bucket,
+        #                                              Key=os.environ.get('folder_location') + file_name,
+        #                                              ExpiresIn=300)
+        params = {
+            'Bucket': bucket,
+            'Key': os.environ.get('folder_location') + file_name
+        }
+        if version_id:
+            params['VersionId'] = version_id
             logging.debug("Created url for version")
-
+        response = s3_client.generate_presigned_url(ClientMethod='get_object', Params=params)
     except ClientError as e:
         logging.error(e)
         return None

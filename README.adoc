@@ -4,6 +4,8 @@ image::https://img.shields.io/badge/-Python-333333?style=flat&logo=python[Python
 
 image::https://img.shields.io/badge/-AWS%20Cloud-333333?style=flat&logo=amazon[AWS Cloud]
 
+image::./Presigned_url.svg[Presigned URL Architecture]
+
 == Install Dependencies
 
 [source, shell]
@@ -40,6 +42,8 @@ region_name =
 [source, shell]
 ----
 chalice deploy
+
+chalice deploy --stage=prod
 ----
 
 
