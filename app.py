@@ -31,13 +31,6 @@ def handler(event, context):
     logging.debug("The event {} and context {}".format(event, context))
     version_id = event['arguments']['versionId']
     file_name = event['arguments']['fileName']
-    if 'fileEvent' in event['arguments']:
-        if event['arguments']['fileEvent'].lower() == 'download':
-            client_method = 'get_object'
-        else:
-            client_method = 'putObject'
-    else:
-        client_method = 'get_object'
     if 'bucket' in event['arguments']:
         logging.debug("Creating pre-signed url for the bucket {}".format(event['arguments']['bucket']))
         return get_pre_signed_url(event['arguments']['bucket'], file_name, event['arguments']['fileEvent'], version_id)
