@@ -47,7 +47,7 @@ def get_pre_signed_url(bucket, file_name, file_event, version_id):
         key = os.environ.get('folder_location') + file_name
         # Presigned url for upload
         if file_event.lower() == 'upload':
-            response = s3_client.generate_presigned_post(Bucket=bucket, Key=key, ExpiresIn=300)
+            response = s3_client.generate_presigned_post(Bucket=bucket, Key=key, ExpiresIn=3600)
             logging.debug("Created url for upload")
         else:  # Presigned url for download
             params = {
